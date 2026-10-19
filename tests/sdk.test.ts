@@ -10,11 +10,21 @@ function response(data: unknown, status = 200) {
 }
 
 describe("FossaPay Node SDK", () => {
+  it("retrieves the business associated with the API key", async () => {
+    const fetcher = vi.fn().mockResolvedValue(response({
+      success: true,
+      data: { id: "merchant_1", businessName: "Example Ltd", environment: "live" },
+    }));
+    const fossapay = new FossaPay({ apiKey: "fk_live", fetch: fetcher });
+    await expect(fossapay.business.retrieve()).resolves.toMatchObject({ id: "merchant_1" });
+    expect((fetcher.mock.calls[0][0] as URL).pathname).toBe("/api/v1/business");
+  });
+
   it("creates an idempotent payout", async () => {
     const fetcher = vi.fn().mockResolvedValue(
       response({ message: "created", data: { payoutId: "pay_1", reference: "ORDER-1" } }, 202),
     );
-    const fossapay = new FossaPay({ apiKey: "fk_test", fetch: fetcher });
+    const fossapay = new FossaPay({ apiKey: "fk_live", fetch: fetcher });
 
     await fossapay.payouts.create(
       {
@@ -32,7 +42,7 @@ describe("FossaPay Node SDK", () => {
     const init = fetcher.mock.calls[0][1] as RequestInit;
     expect(init.method).toBe("POST");
     expect(init.headers).toMatchObject({
-      "x-api-key": "fk_test",
+      "x-api-key": "fk_live",
       "x-idempotency-key": "payout-order-1",
       "idempotency-key": "payout-order-1",
     });
