@@ -7,7 +7,7 @@ The official server side Node.js SDK for FossaPay customers, wallets, collection
 - Node.js 18 or newer
 - A FossaPay API key
 - A verified FossaPay business
-- A live API key for payouts
+- A live API key
 
 Keep API keys on your server. Do not expose this package or your API key in browser code.
 
@@ -246,8 +246,6 @@ const payout = await fossapay.payouts.create(
 await fossapay.payouts.retrieve(payout.payoutId);
 await fossapay.payouts.retrieveByReference("ORDER-10025");
 ```
-
-The SDK supports individual payouts only.
 
 ### 9. Receive webhooks
 
