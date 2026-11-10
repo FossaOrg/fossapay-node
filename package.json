@@ -1,6 +1,6 @@
 {
   "name": "@fossapay/node",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Official server-side Node.js SDK for the FossaPay API",
   "license": "MIT",
   "author": "FossaPay",
