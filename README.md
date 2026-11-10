@@ -1,6 +1,9 @@
 # FossaPay Node SDK
 
-The official server side Node.js SDK for FossaPay customers, wallets, collections, transactions, bank account resolution, payouts, and webhooks.
+The official server side Node.js SDK for FossaPay customers, wallets, collections, transactions, transaction splits, bank account resolution, payouts, and webhooks.
+
+See the [FossaPay SDK changelog](./CHANGELOG.md) for release notes covering both
+`@fossapay/node` and `@fossapay/checkout`.
 
 ## Requirements
 
@@ -396,6 +399,7 @@ try {
 | `transactions` | `list()`, `retrieve()` |
 | `banks` | `list()`, `resolveAccount()` |
 | `payouts` | `create()`, `retrieve()`, `retrieveByReference()` |
+| `splits` | `create()`, `list()`, `retrieve()`, `update()`, `addRecipient()`, `updateRecipient()`, `removeRecipient()`, `preview()`, `activate()`, `pause()`, `listSources()`, `updateSources()`, `listTransactions()` |
 | `webhooks` | `constructEvent()`, `verifySignature()` |
 
 ## Development
