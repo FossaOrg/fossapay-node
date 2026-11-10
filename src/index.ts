@@ -7,6 +7,7 @@ import { CustomersResource } from "./resources/customers";
 import type { FossaPayOptions } from "./types";
 import { WebhooksResource } from "./resources/webhooks";
 import { BusinessResource } from "./resources/business";
+import { SplitsResource } from "./resources/splits";
 
 export class FossaPay {
   readonly business: BusinessResource;
@@ -17,6 +18,7 @@ export class FossaPay {
   readonly banks: BanksResource;
   readonly payouts: PayoutsResource;
   readonly webhooks: WebhooksResource;
+  readonly splits: SplitsResource;
 
   constructor(options: FossaPayOptions) {
     const client = new FossaPayClient(options);
@@ -28,6 +30,7 @@ export class FossaPay {
     this.banks = new BanksResource(client);
     this.payouts = new PayoutsResource(client);
     this.webhooks = new WebhooksResource();
+    this.splits = new SplitsResource(client);
   }
 }
 
@@ -40,3 +43,4 @@ export type * from "./resources/wallets";
 export type * from "./resources/customers";
 export type * from "./resources/business";
 export * from "./resources/webhooks";
+export type * from "./resources/splits";

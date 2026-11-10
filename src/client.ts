@@ -11,7 +11,7 @@ interface ApiEnvelope<T> {
 }
 
 export interface ClientRequest extends RequestOptions {
-  method?: "GET" | "POST";
+  method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
   query?: Record<string, string | number | boolean | null | undefined>;
   body?: unknown;
 }

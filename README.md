@@ -47,6 +47,39 @@ const fossapay = new FossaPay({
 
 ## Recommended integration flow
 
+### Create a reusable transaction split
+
+Use a split code to distribute eligible NGN collections without configuring
+the split separately for every transaction.
+
+```ts
+const split = await fossapay.splits.create({
+  name: "Marketplace sellers",
+  type: "percentage",
+  currency: "NGN",
+  collectionTypes: ["checkout"],
+});
+
+await fossapay.splits.addRecipient(split.splitCode, {
+  type: "external_bank",
+  accountNumber: "0123456789",
+  bankCode: "000001",
+  allocation: "10",
+});
+
+await fossapay.splits.activate(split.splitCode);
+
+await fossapay.splits.updateSources(split.splitCode, {
+  productIds: ["PRODUCT_UUID"],
+  storeIds: ["STORE_UUID"],
+  paymentLinkIds: ["PAYMENT_LINK_UUID_1", "PAYMENT_LINK_UUID_2"],
+});
+```
+
+The returned `splitCode` can be passed to checkout or payment-link creation
+through `@fossapay/checkout`. You can also retrieve, preview, pause, and inspect
+transactions for a split through `fossapay.splits`.
+
 ### 1. Verify the connected business
 
 ```ts
