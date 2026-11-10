@@ -25,6 +25,9 @@
   },
   "scripts": {
     "build": "tsup",
+    "release:patch": "npm version patch && npm publish --access public",
+    "release:minor": "npm version minor && npm publish --access public",
+    "release:major": "npm version major && npm publish --access public",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
